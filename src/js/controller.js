@@ -1,7 +1,6 @@
 import icons from 'url:../img/icons.svg';
 
 const recipeContainer = document.querySelector('.recipe');
-const startMessageEl = document.querySelector('.message');
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -13,6 +12,9 @@ const timeout = function (s) {
 
 async function getRecipe() {
   try {
+    // Display spinner
+    renderSpinner(recipeContainer);
+
     // Loading the recipe
     const res = await fetch(
       'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
@@ -126,7 +128,7 @@ async function getRecipe() {
         >
           <span>Directions</span>
           <svg class="search__icon">
-            <use href="src/img/icons.svg#icon-arrow-right"></use>
+            <use href="${icons}#icon-arrow-right"></use>
           </svg>
         </a>
       </div>
@@ -138,6 +140,18 @@ async function getRecipe() {
 }
 
 getRecipe();
+
+function renderSpinner(parentEL) {
+  const spinnerHtml = `
+  <div class="spinner">
+    <svg>
+      <use href="${icons}#icon-loader"></use>
+    </svg>
+  </div>
+  `;
+  parentEL.innerHTML = '';
+  parentEL.insertAdjacentHTML('afterbegin', spinnerHtml);
+}
 
 // https://forkify-api.herokuapp.com/v2
 // 00624c3d-c35f-43d5-9a23-817b34496641 my api key
