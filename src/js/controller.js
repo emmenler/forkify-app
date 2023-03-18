@@ -4,22 +4,25 @@ import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
 
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
+['hashchange', 'load'].forEach((ev) => window.addEventListener(ev, getRecipe));
+
+// --- FUNCTIONS ---
 
 async function getRecipe() {
   try {
+    // Getting the recipe id from the hash
+    const id = window.location.hash.slice(1);
+
+    // Guard clause if no id
+    if (!id) return;
+
     // Display spinner
     renderSpinner(recipeContainer);
 
     // Loading the recipe
     const res = await fetch(
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
+      // 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bca79'
     );
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
@@ -34,12 +37,18 @@ async function getRecipe() {
       source: recipe.source_url,
       title: recipe.title,
     };
-    console.log(recipe);
 
     // Rendering the recipe
-    recipeContainer.innerHTML = '';
+    renderRecipe(recipe);
+  } catch (err) {
+    console.error(`Something went wrong: ${err}`);
+  }
+}
 
-    const recipeHtml = `
+function renderRecipe(recipe) {
+  recipeContainer.innerHTML = '';
+
+  const recipeHtml = `
       <figure class="recipe__fig">
         <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
         <h1 class="recipe__title">
@@ -135,13 +144,9 @@ async function getRecipe() {
         </a>
       </div>
     `;
-    recipeContainer.insertAdjacentHTML('afterbegin', recipeHtml);
-  } catch (err) {
-    console.error(`Something went wrong: ${err}`);
-  }
-}
 
-getRecipe();
+  recipeContainer.insertAdjacentHTML('afterbegin', recipeHtml);
+}
 
 function renderSpinner(parentEL) {
   const spinnerHtml = `
@@ -153,6 +158,14 @@ function renderSpinner(parentEL) {
   `;
   parentEL.innerHTML = '';
   parentEL.insertAdjacentHTML('afterbegin', spinnerHtml);
+}
+
+function timeout(s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long! Timeout after ${s} second`));
+    }, s * 1000);
+  });
 }
 
 // https://forkify-api.herokuapp.com/v2
