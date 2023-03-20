@@ -13,7 +13,7 @@ export async function loadRecipe(id) {
     const data = await getJSON(`${API_URL}/${id}`);
 
     // Formatting the recipe object
-    const recipe = data.data.recipe;
+    const { recipe } = data.data;
     state.recipe = {
       cookingTime: recipe.cooking_time,
       id: recipe.id,
