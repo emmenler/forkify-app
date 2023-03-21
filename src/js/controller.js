@@ -51,6 +51,10 @@ async function controlSearchResults() {
 
     // Load search results
     await model.loadSearchResults(query);
+
+    // Render search results
+    searchResultsView.render(model.state.search.results);
+    console.log(model.state.search.results);
   } catch (err) {
     searchResultsView.renderError();
   }
