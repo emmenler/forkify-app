@@ -12,6 +12,24 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  renderSpinner() {
+    const spinnerHtml = `
+    <div class="spinner">
+      <svg>
+        <use href="${icons}#icon-loader"></use>
+      </svg>
+    </div>
+    `;
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', spinnerHtml);
+  }
+
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach((event) =>
+      window.addEventListener(event, handler)
+    );
+  }
+
   #clear() {
     this.#parentElement.innerHTML = '';
   }
@@ -119,18 +137,6 @@ class RecipeView {
         </div>
       </li>
     `;
-  }
-
-  renderSpinner() {
-    const spinnerHtml = `
-    <div class="spinner">
-      <svg>
-        <use href="${icons}#icon-loader"></use>
-      </svg>
-    </div>
-    `;
-    this.#clear();
-    this.#parentElement.insertAdjacentHTML('afterbegin', spinnerHtml);
   }
 }
 

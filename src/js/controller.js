@@ -6,13 +6,13 @@ import recipeView from './views/recipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-const recipeContainer = document.querySelector('.recipe');
-
-['hashchange', 'load'].forEach((ev) =>
-  window.addEventListener(ev, controlRecipes)
-);
+init();
 
 // --- FUNCTIONS ---
+
+function init() {
+  recipeView.addHandlerRender(controlRecipes);
+}
 
 async function controlRecipes() {
   try {

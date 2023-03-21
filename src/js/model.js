@@ -1,12 +1,13 @@
 import { async } from 'regenerator-runtime';
 import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 import { getJSON } from './helper.js';
-// ---STATE---
+
+// --- STATE ---
 export const state = {
   recipe: {},
 };
 
-// ---BUSINESS LOGIC---
+// --- BUSINESS LOGIC ---
 export async function loadRecipe(id) {
   try {
     // Getting the recipe from the API
