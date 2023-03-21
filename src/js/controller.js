@@ -8,9 +8,9 @@ import searchResultsView from './views/searchResultsView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 init();
 
@@ -57,7 +57,7 @@ async function controlSearchResults() {
     await model.loadSearchResults(query);
 
     // Render search results
-    searchResultsView.render(model.state.search.results);
+    searchResultsView.render(model.getSearchResultsPage());
   } catch (err) {
     searchResultsView.renderError();
   }
