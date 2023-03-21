@@ -26,6 +26,7 @@ export async function loadRecipe(id) {
       title: recipe.title,
     };
   } catch (err) {
-    console.error(`Something went wrong: ${err}`);
+    console.error(`${err}`);
+    throw err;
   }
 }
