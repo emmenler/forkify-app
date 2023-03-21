@@ -35,6 +35,17 @@ async function controlRecipes() {
   }
 }
 
+async function controlSearchResults() {
+  try {
+    await model.loadSearchResults('sandwich');
+    console.log(model.state.search.results);
+  } catch (err) {
+    console.error(`${err}`);
+  }
+}
+
+controlSearchResults();
+
 function timeout(s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
