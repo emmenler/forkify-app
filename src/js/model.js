@@ -5,6 +5,10 @@ import { getJSON } from './helper.js';
 // --- STATE ---
 export const state = {
   recipe: {},
+  search: {
+    query: '',
+    results: [],
+  },
 };
 
 // --- BUSINESS LOGIC ---
@@ -25,6 +29,24 @@ export async function loadRecipe(id) {
       source: recipe.source_url,
       title: recipe.title,
     };
+  } catch (err) {
+    console.error(`${err}`);
+    throw err;
+  }
+}
+
+export async function loadSearchResults(query) {
+  try {
+    const data = await getJSON(`${API_URL}?search=${query}`);
+    console.log(data.data.recipes);
+    state.search.results = data.data.recipes.map((recipe) => {
+      return {
+        id: recipe.id,
+        image: recipe.image_url,
+        title: recipe.title,
+        publisher: recipe.publisher,
+      };
+    });
   } catch (err) {
     console.error(`${err}`);
     throw err;

@@ -43,6 +43,4 @@ function timeout(s) {
   });
 }
 
-// https://forkify-api.herokuapp.com/v2
 // 00624c3d-c35f-43d5-9a23-817b34496641 my api key
-///////////////////////////////////////
