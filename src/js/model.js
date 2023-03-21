@@ -38,7 +38,6 @@ export async function loadRecipe(id) {
 export async function loadSearchResults(query) {
   try {
     const data = await getJSON(`${API_URL}?search=${query}`);
-    if (data.results === 0) throw new Error(`Invalid query: ${query}`);
     state.search.results = data.data.recipes.map((recipe) => {
       return {
         id: recipe.id,

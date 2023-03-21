@@ -9,7 +9,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 if (module.hot) {
-  module.hot.accept;
+  module.hot.accept();
 }
 
 init();
@@ -58,7 +58,6 @@ async function controlSearchResults() {
 
     // Render search results
     searchResultsView.render(model.state.search.results);
-    console.log(model.state.search.results);
   } catch (err) {
     searchResultsView.renderError();
   }
