@@ -46,10 +46,13 @@ async function controlSearchResults() {
     // Guard clause if no query
     if (!query) return;
 
+    // Display spinner
+    searchResultsView.renderSpinner();
+
     // Load search results
     await model.loadSearchResults(query);
   } catch (err) {
-    console.error(`${err}`);
+    searchResultsView.renderError();
   }
 }
 
