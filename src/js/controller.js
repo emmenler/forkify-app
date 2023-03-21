@@ -38,8 +38,14 @@ async function controlRecipes() {
 
 async function controlSearchResults() {
   try {
-    await model.loadSearchResults('sandwich');
-    console.log(model.state.search.results);
+    // Get search query from search input
+    const query = searchView.getQuery();
+
+    // Guard clause if no query
+    if (!query) return;
+
+    // Load search results
+    await model.loadSearchResults(query);
   } catch (err) {
     console.error(`${err}`);
   }
