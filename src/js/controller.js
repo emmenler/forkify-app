@@ -13,6 +13,7 @@ init();
 
 function init() {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 }
 
 async function controlRecipes() {
@@ -50,8 +51,6 @@ async function controlSearchResults() {
     console.error(`${err}`);
   }
 }
-
-controlSearchResults();
 
 function timeout(s) {
   return new Promise(function (_, reject) {
