@@ -8,6 +8,10 @@ import searchResultsView from './views/searchResultsView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+if (module.hot) {
+  module.hot.accept;
+}
+
 init();
 
 // --- FUNCTIONS ---
