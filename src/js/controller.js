@@ -59,7 +59,7 @@ async function controlSearchResults() {
     await model.loadSearchResults(query);
 
     // Render search results
-    searchResultsView.render(model.getSearchResultsPage(3));
+    searchResultsView.render(model.getSearchResultsPage());
     searchPaginationView.render(model.state.search);
   } catch (err) {
     searchResultsView.renderError();
@@ -68,6 +68,8 @@ async function controlSearchResults() {
 
 function controlPagination(moveToPage) {
   console.log(`Pagination controlled! Move to page ${moveToPage}`);
+  searchResultsView.render(model.getSearchResultsPage(moveToPage));
+  searchPaginationView.render(model.state.search);
 }
 
 function timeout(s) {
