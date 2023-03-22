@@ -89,5 +89,5 @@ export function removeBookmark(id) {
   state.bookmarks.splice(index, 1);
 
   // Mark the recipe as NOT bookmarked
-  if (recipe.id === state.recipe.id) state.recipe.isBookmark = false;
+  if (id === state.recipe.id) state.recipe.isBookmark = false;
 }

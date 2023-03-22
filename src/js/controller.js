@@ -44,7 +44,6 @@ async function controlRecipes() {
 
     // Rendering the recipe
     recipeView.render(model.state.recipe);
-    console.log(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
   }
@@ -91,8 +90,12 @@ function controlServings(newServings) {
 }
 
 function controlAddBookmark() {
-  model.addBookmark(model.state.recipe);
-  console.log(model.state.recipe);
+  if (!model.state.recipe.isBookmark) {
+    model.addBookmark(model.state.recipe);
+  } else {
+    model.removeBookmark(model.state.recipe.id);
+  }
+
   recipeView.update(model.state.recipe);
 }
 
