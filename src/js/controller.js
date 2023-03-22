@@ -59,6 +59,7 @@ async function controlSearchResults() {
 
     // Render search results
     searchResultsView.render(model.getSearchResultsPage());
+    searchPaginationView.render(model.state.search);
   } catch (err) {
     searchResultsView.renderError();
   }
