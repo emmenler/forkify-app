@@ -19,6 +19,7 @@ init();
 
 function init() {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   searchPaginationView.addHandlerClick(controlPagination);
 }
@@ -74,6 +75,15 @@ function controlPagination(moveToPage) {
 
   // Render UPDATED pagination
   searchPaginationView.render(model.state.search);
+}
+
+function controlServings() {
+  console.log('Controlled');
+  // Update the recipe object
+  model.updateServings(6);
+
+  // Display NEW recipe object
+  recipeView.render(model.state.recipe);
 }
 
 function timeout(s) {
