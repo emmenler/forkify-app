@@ -92,6 +92,7 @@ function controlServings(newServings) {
 function controlAddBookmark() {
   model.addBookmark(model.state.recipe);
   console.log(model.state.recipe);
+  recipeView.update(model.state.recipe);
 }
 
 function timeout(s) {

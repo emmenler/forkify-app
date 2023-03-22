@@ -26,7 +26,7 @@ export default class View {
       // Updating changed TEXT
       if (
         !newElm.isEqualNode(curElm) &&
-        newElm?.firstChild.nodeValue.trim() !== ''
+        newElm.firstChild?.nodeValue.trim() !== ''
       ) {
         curElm.textContent = newElm.textContent;
       }
