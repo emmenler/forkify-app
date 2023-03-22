@@ -10,7 +10,9 @@ class SearchPaginationView extends View {
     );
     const curPage = this._data.page;
     const paginationNextMarkup = `
-      <button class="btn--inline pagination__btn--next">
+      <button class="btn--inline pagination__btn--next" data-page="${
+        curPage + 1
+      }">
       <span>Page ${curPage + 1}</span>
       <svg class="search__icon">
         <use href="${icons}#icon-arrow-right"></use>
@@ -18,7 +20,9 @@ class SearchPaginationView extends View {
       </button>
     `;
     const paginationPrevMarkup = `
-      <button class="btn--inline pagination__btn--prev">
+      <button class="btn--inline pagination__btn--prev" data-page="${
+        curPage - 1
+      }">
       <svg class="search__icon">
         <use href="${icons}#icon-arrow-left"></use>
       </svg>
@@ -46,8 +50,8 @@ class SearchPaginationView extends View {
   addHandlerClick(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--inline');
-      console.log(btn);
-      handler();
+      const moveToPage = btn.dataset.page;
+      handler(moveToPage);
     });
   }
 }

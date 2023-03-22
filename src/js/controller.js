@@ -66,8 +66,8 @@ async function controlSearchResults() {
   }
 }
 
-function controlPagination() {
-  console.log('Pagination controlled!');
+function controlPagination(moveToPage) {
+  console.log(`Pagination controlled! Move to page ${moveToPage}`);
 }
 
 function timeout(s) {
