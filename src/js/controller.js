@@ -35,7 +35,9 @@ async function controlRecipes() {
     if (!id) return;
 
     // Update selected preview
-    searchResultsView.update(model.getSearchResultsPage(1));
+    searchResultsView.update(
+      model.getSearchResultsPage(model.state.search.page)
+    );
 
     // Update selected bookmark
     bookmarksView.update(model.state.bookmarks);
