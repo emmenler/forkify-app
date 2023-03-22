@@ -38,7 +38,7 @@ async function controlRecipes() {
     searchResultsView.update(model.getSearchResultsPage(1));
 
     // Update selected bookmark
-    // bookmarksView.update();
+    bookmarksView.update(model.state.bookmarks);
 
     // Display spinner
     recipeView.renderSpinner();
