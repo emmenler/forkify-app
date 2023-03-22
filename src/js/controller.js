@@ -82,7 +82,7 @@ function controlServings(newServings) {
   model.updateServings(newServings);
 
   // Display NEW recipe object
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 }
 
 function timeout(s) {
