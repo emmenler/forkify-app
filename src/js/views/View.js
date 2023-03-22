@@ -23,11 +23,19 @@ export default class View {
     newAllElements.forEach((newElm, i) => {
       const curElm = curAllElements[i];
 
+      // Updating changed TEXT
       if (
         !newElm.isEqualNode(curElm) &&
         newElm?.firstChild.nodeValue.trim() !== ''
       ) {
         curElm.textContent = newElm.textContent;
+      }
+
+      // Updating changed ATTRIBUTES
+      if (!newElm.isEqualNode(curElm)) {
+        Array.from(newElm.attributes).forEach((attr) =>
+          curElm.setAttribute(attr.name, attr.value)
+        );
       }
     });
   }
