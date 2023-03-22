@@ -20,6 +20,7 @@ init();
 function init() {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  searchPaginationView.addHandlerClick(controlPagination);
 }
 
 async function controlRecipes() {
@@ -58,11 +59,15 @@ async function controlSearchResults() {
     await model.loadSearchResults(query);
 
     // Render search results
-    searchResultsView.render(model.getSearchResultsPage());
+    searchResultsView.render(model.getSearchResultsPage(3));
     searchPaginationView.render(model.state.search);
   } catch (err) {
     searchResultsView.renderError();
   }
+}
+
+function controlPagination() {
+  console.log('Pagination controlled!');
 }
 
 function timeout(s) {

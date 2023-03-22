@@ -9,48 +9,46 @@ class SearchPaginationView extends View {
       this._data.results.length / this._data.resultsPerPage
     );
     const curPage = this._data.page;
+    const paginationNextMarkup = `
+      <button class="btn--inline pagination__btn--next">
+      <span>Page ${curPage + 1}</span>
+      <svg class="search__icon">
+        <use href="${icons}#icon-arrow-right"></use>
+      </svg>
+      </button>
+    `;
+    const paginationPrevMarkup = `
+      <button class="btn--inline pagination__btn--prev">
+      <svg class="search__icon">
+        <use href="${icons}#icon-arrow-left"></use>
+      </svg>
+      <span>Page ${curPage - 1}</span>
+      </button>
+    `;
+
     console.log(numPages, curPage);
     // 1. First page, only button to move forward
     if (curPage === 1 && numPages > 1) {
-      return `
-          <button class="btn--inline pagination__btn--next">
-          <span>Page ${curPage + 1}</span>
-          <svg class="search__icon">
-            <use href="${icons}#icon-arrow-right"></use>
-          </svg>
-          </button>
-      `;
+      return paginationNextMarkup;
     }
     // 2. Last page, only button to move backward
     if (curPage === numPages && numPages > 1) {
-      return `
-          <button class="btn--inline pagination__btn--prev">
-          <svg class="search__icon">
-            <use href="${icons}#icon-arrow-left"></use>
-          </svg>
-          <span>Page ${curPage - 1}</span>
-          </button>
-      `;
+      return paginationPrevMarkup;
     }
     // 3. Both buttons are present
     if (curPage < numPages) {
-      return `
-          <button class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-              <use href="${icons}#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${curPage - 1}</span>
-          </button>
-          <button class="btn--inline pagination__btn--next">
-            <span>Page ${curPage + 1}</span>
-            <svg class="search__icon">
-              <use href="${icons}#icon-arrow-right"></use>
-            </svg>
-          </button>
-      `;
+      return `${paginationPrevMarkup}${paginationNextMarkup}`;
     }
     // 4. Less that RES_PER_PAGE previews on page, no buttons
     return '';
+  }
+
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--inline');
+      console.log(btn);
+      handler();
+    });
   }
 }
 
