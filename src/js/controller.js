@@ -4,6 +4,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import searchResultsView from './views/searchResultsView.js';
 import searchPaginationView from './views/searchPaginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 // Libraries imports
 import 'core-js/stable';
@@ -35,6 +36,9 @@ async function controlRecipes() {
 
     // Update selected preview
     searchResultsView.update(model.getSearchResultsPage(1));
+
+    // Update selected bookmark
+    // bookmarksView.update();
 
     // Display spinner
     recipeView.renderSpinner();
@@ -90,13 +94,18 @@ function controlServings(newServings) {
 }
 
 function controlAddBookmark() {
+  // add/remove bookmark
   if (!model.state.recipe.isBookmark) {
     model.addBookmark(model.state.recipe);
   } else {
     model.removeBookmark(model.state.recipe.id);
   }
 
+  // Update bookmark icon in recipeView
   recipeView.update(model.state.recipe);
+
+  // Render bookmark in bookmarksView
+  bookmarksView.render(model.state.bookmarks);
 }
 
 function timeout(s) {
