@@ -20,6 +20,7 @@ init();
 function init() {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   searchPaginationView.addHandlerClick(controlPagination);
 }
