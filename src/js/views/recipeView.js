@@ -17,6 +17,7 @@ class RecipeView extends View {
       const btn = e.target.closest('.btn--update-servings');
       if (!btn) return;
       const newServings = Number(btn.dataset.updateTo);
+      if (newServings <= 0) return;
       handler(newServings);
     });
   }
@@ -49,7 +50,9 @@ class RecipeView extends View {
             <span class="recipe__info-data recipe__info-data--people">${
               this._data.servings
             }</span>
-            <span class="recipe__info-text">servings</span>
+            <span class="recipe__info-text">${
+              this._data.servings === 1 ? 'serving' : 'servings'
+            }</span>
   
             <div class="recipe__info-buttons">
               <button class="btn--tiny btn--update-servings"data-update-to="${
