@@ -11,6 +11,7 @@ export const state = {
     resultsPerPage: RES_PER_PAGE,
     page: 1,
   },
+  bookmarks: [],
 };
 
 // --- BUSINESS LOGIC ---
@@ -67,4 +68,12 @@ export function updateServings(newServings) {
   });
 
   state.recipe.servings = newServings;
+}
+
+export function addBookmark(recipe) {
+  // Add passed recipe object to bookmarks arr
+  state.bookmarks.push(recipe);
+
+  // Mark the recipe as bookmarked
+  if (recipe.id === state.recipe.id) state.recipe.isBookmark = true;
 }
