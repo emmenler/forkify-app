@@ -77,10 +77,9 @@ function controlPagination(moveToPage) {
   searchPaginationView.render(model.state.search);
 }
 
-function controlServings() {
-  console.log('Controlled');
+function controlServings(newServings) {
   // Update the recipe object
-  model.updateServings(6);
+  model.updateServings(newServings);
 
   // Display NEW recipe object
   recipeView.render(model.state.recipe);
