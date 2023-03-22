@@ -88,6 +88,11 @@ function controlServings(newServings) {
   recipeView.update(model.state.recipe);
 }
 
+function controlAddBookmark() {
+  model.addBookmark(model.state.recipe);
+  console.log(model.state.recipe);
+}
+
 function timeout(s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
