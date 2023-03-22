@@ -30,7 +30,6 @@ class SearchPaginationView extends View {
       </button>
     `;
 
-    console.log(numPages, curPage);
     // 1. First page, only button to move forward
     if (curPage === 1 && numPages > 1) {
       return paginationNextMarkup;
