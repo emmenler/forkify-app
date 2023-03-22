@@ -32,6 +32,9 @@ async function controlRecipes() {
     // Guard clause if no id
     if (!id) return;
 
+    // Update selected preview
+    searchResultsView.update(model.getSearchResultsPage(1));
+
     // Display spinner
     recipeView.renderSpinner();
 
