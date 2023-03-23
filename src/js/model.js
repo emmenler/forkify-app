@@ -51,6 +51,7 @@ function formatRecipe(data) {
     servings: recipe.servings,
     sourceUrl: recipe.source_url,
     title: recipe.title,
+    // Add 'key' conditionally
     ...(recipe.key && { key: recipe.key }),
   };
 }

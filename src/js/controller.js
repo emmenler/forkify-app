@@ -128,6 +128,15 @@ async function controlAddRecipe(userRecipe) {
     // Render sent recipe to the page
     recipeView.render(model.state.recipe);
 
+    // Render sent recipe in bookmarks
+    bookmarksView.render(model.state.bookmarks);
+
+    // Set the hash to sent recipe id
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+
+    // Update bookmarks list to highlight current recipe
+    bookmarksView.update(model.state.bookmarks);
+
     // Render success message on recipe form after submission
     addRecipeView.renderSuccessMessage();
 
@@ -154,4 +163,4 @@ function timeout(s) {
 function clearStorage() {
   localStorage.removeItem('bookmarks');
 }
-// clearStorage();
+clearStorage();
