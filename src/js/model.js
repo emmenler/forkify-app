@@ -22,6 +22,7 @@ function init() {
   if (storageBookmarks) state.bookmarks = JSON.parse(storageBookmarks);
 }
 
+// --- LOADING RECIPE ---
 export async function loadRecipe(id) {
   try {
     // Getting the recipe from the API
@@ -39,6 +40,22 @@ export async function loadRecipe(id) {
   }
 }
 
+function formatRecipe(data) {
+  const { recipe } = data.data;
+  return {
+    cookingTime: recipe.cooking_time,
+    id: recipe.id,
+    image: recipe.image_url,
+    ingredients: recipe.ingredients,
+    publisher: recipe.publisher,
+    servings: recipe.servings,
+    sourceUrl: recipe.source_url,
+    title: recipe.title,
+    ...(recipe.key && { key: recipe.key }),
+  };
+}
+
+// --- SEARCH RESULTS ---
 export async function loadSearchResults(query) {
   try {
     const data = await getJSON(`${API_URL}?search=${query}`);
@@ -62,6 +79,7 @@ export function getSearchResultsPage(page) {
   return state.search.results.slice(first, last);
 }
 
+// --- RECIPE SERVINGS ---
 export function updateServings(newServings) {
   state.recipe.ingredients.forEach((ing) => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
@@ -70,6 +88,7 @@ export function updateServings(newServings) {
   state.recipe.servings = newServings;
 }
 
+// --- BOOKMARKS ---
 export function addBookmark(recipe) {
   // Add passed recipe object to bookmarks arr
   state.bookmarks.push(recipe);
@@ -93,21 +112,7 @@ function updateBookmarksStorage() {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 }
 
-function formatRecipe(data) {
-  const { recipe } = data.data;
-  return {
-    cookingTime: recipe.cooking_time,
-    id: recipe.id,
-    image: recipe.image_url,
-    ingredients: recipe.ingredients,
-    publisher: recipe.publisher,
-    servings: recipe.servings,
-    sourceUrl: recipe.source_url,
-    title: recipe.title,
-    ...(recipe.key && { key: recipe.key }),
-  };
-}
-
+// --- SEND USER RECIPE ---
 export async function addUserRecipe(userRecipe) {
   try {
     const ingredients = Object.entries(userRecipe)

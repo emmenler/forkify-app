@@ -122,9 +122,16 @@ function controlRenderBookmarks() {
 
 async function controlAddRecipe(userRecipe) {
   try {
+    // Send the recipe to API
     await model.addUserRecipe(userRecipe);
+
+    // Render sent recipe to the page
     recipeView.render(model.state.recipe);
+
+    // Render success message on recipe form after submission
     addRecipeView.renderSuccessMessage();
+
+    // Close form after 2,5 sec
     setTimeout(() => {
       addRecipeView.toggleRecipeWindow();
     }, CLOSE_MODAL_SEC * 1000);
@@ -147,4 +154,4 @@ function timeout(s) {
 function clearStorage() {
   localStorage.removeItem('bookmarks');
 }
-clearStorage();
+// clearStorage();
