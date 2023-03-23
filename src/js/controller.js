@@ -1,5 +1,6 @@
 // Module imports
 import * as model from './model.js';
+import { CLOSE_MODAL_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import searchResultsView from './views/searchResultsView.js';
@@ -122,6 +123,11 @@ function controlRenderBookmarks() {
 async function controlAddRecipe(userRecipe) {
   try {
     await model.addUserRecipe(userRecipe);
+    recipeView.render(model.state.recipe);
+    addRecipeView.renderSuccessMessage();
+    setTimeout(() => {
+      addRecipeView.toggleRecipeWindow();
+    }, CLOSE_MODAL_SEC * 1000);
   } catch (err) {
     console.error(`${err}`);
     addRecipeView.renderError(err.message);
@@ -141,4 +147,4 @@ function timeout(s) {
 function clearStorage() {
   localStorage.removeItem('bookmarks');
 }
-// clearStorage();
+clearStorage();
