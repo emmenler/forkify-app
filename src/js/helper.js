@@ -10,7 +10,20 @@ function timeout(s) {
 
 export async function getJSON(url) {
   try {
-    const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]);
+    const fetcher = fetch(url);
+    const res = await Promise.race([fetcher, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+    if (!res.ok) throw new Error(`${data.message}`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function sendJSON(url) {
+  try {
+    const fetcher = fetch(url);
+    const res = await Promise.race([fetcher, timeout(TIMEOUT_SEC)]);
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message}`);
     return data;
