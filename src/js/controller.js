@@ -12,10 +12,6 @@ import addRecipeView from './views/addRecipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
-
 init();
 
 // --- FUNCTIONS ---
@@ -157,8 +153,6 @@ function timeout(s) {
     }, s * 1000);
   });
 }
-
-// 00624c3d-c35f-43d5-9a23-817b34496641 my api key
 
 function clearStorage() {
   localStorage.removeItem('bookmarks');
