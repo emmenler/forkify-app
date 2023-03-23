@@ -163,4 +163,4 @@ function timeout(s) {
 function clearStorage() {
   localStorage.removeItem('bookmarks');
 }
-clearStorage();
+// clearStorage();
