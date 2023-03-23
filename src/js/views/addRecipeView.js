@@ -2,29 +2,32 @@ import View from './View.js';
 
 class AddRecipeView {
   _parentElement = document.querySelector('.upload');
-  _btnOpen = document.querySelector('.nav__btn--add-recipe');
-  _btnCLose = document.querySelector('.btn--close-modal');
-  _addRecipeOverlay = document.querySelector('.overlay');
-  _addRecipeWindow = document.querySelector('.add-recipe-window');
+  #btnOpen = document.querySelector('.nav__btn--add-recipe');
+  #btnClose = document.querySelector('.btn--close-modal');
+  #addRecipeOverlay = document.querySelector('.overlay');
+  #addRecipeWindow = document.querySelector('.add-recipe-window');
 
-  toggleRecipeWindow() {
+  #toggleRecipeWindow() {
     console.log('toggle');
-    this._addRecipeOverlay.classList.toggle('hidden');
-    this._addRecipeWindow.classList.toggle('hidden');
+    this.#addRecipeOverlay.classList.toggle('hidden');
+    this.#addRecipeWindow.classList.toggle('hidden');
   }
 
   addHandlerShowModal() {
-    this._btnOpen.addEventListener('click', this.toggleRecipeWindow.bind(this));
+    this.#btnOpen.addEventListener(
+      'click',
+      this.#toggleRecipeWindow.bind(this)
+    );
   }
 
   addHandlerHideModal() {
-    this._btnCLose.addEventListener(
+    this.#btnClose.addEventListener(
       'click',
-      this.toggleRecipeWindow.bind(this)
+      this.#toggleRecipeWindow.bind(this)
     );
-    this._addRecipeOverlay.addEventListener(
+    this.#addRecipeOverlay.addEventListener(
       'click',
-      this.toggleRecipeWindow.bind(this)
+      this.#toggleRecipeWindow.bind(this)
     );
   }
 }
