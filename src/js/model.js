@@ -81,6 +81,7 @@ export function addBookmark(recipe) {
 
   // Mark the recipe as bookmarked
   if (recipe.id === state.recipe.id) state.recipe.isBookmark = true;
+  updateBookmarksStorage();
 }
 
 export function removeBookmark(id) {
@@ -90,4 +91,9 @@ export function removeBookmark(id) {
 
   // Mark the recipe as NOT bookmarked
   if (id === state.recipe.id) state.recipe.isBookmark = false;
+  updateBookmarksStorage();
+}
+
+function updateBookmarksStorage() {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 }
