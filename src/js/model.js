@@ -69,6 +69,7 @@ export async function loadSearchResults(query) {
         image: recipe.image_url,
         title: recipe.title,
         publisher: recipe.publisher,
+        ...(recipe.key && { key: recipe.key }),
       };
     });
   } catch (err) {
@@ -128,7 +129,7 @@ export async function addUserRecipe(userRecipe) {
     const ingredients = Object.entries(userRecipe)
       .filter((ent) => ent[0].startsWith('ingredient') && ent[1])
       .map((ing) => {
-        const ingredients = ing[1].replaceAll(' ', '').split(',');
+        const ingredients = ing[1].split(',').map((ing) => ing.trim());
         if (ingredients.length != 3)
           // Throw error if user submitted in wrong format
           throw new Error('Wrong input format! Please, use correct format.');
