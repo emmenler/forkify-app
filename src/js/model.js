@@ -28,8 +28,7 @@ export async function loadRecipe(id) {
     const data = await getJSON(`${API_URL}/${id}`);
 
     // Formatting the recipe object
-    const { recipe } = data.data;
-    state.recipe = formatRecipe(recipe);
+    state.recipe = formatRecipe(data);
     if (state.bookmarks.some((bookmark) => bookmark.id === state.recipe.id)) {
       state.recipe.isBookmark = true;
     } else {
@@ -94,7 +93,8 @@ function updateBookmarksStorage() {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 }
 
-function formatRecipe(recipe) {
+function formatRecipe(data) {
+  const { recipe } = data.data;
   return {
     cookingTime: recipe.cooking_time,
     id: recipe.id,
@@ -104,6 +104,7 @@ function formatRecipe(recipe) {
     servings: recipe.servings,
     sourceUrl: recipe.source_url,
     title: recipe.title,
+    ...(recipe.key && { key: recipe.key }),
   };
 }
 
@@ -135,8 +136,9 @@ export async function addUserRecipe(userRecipe) {
     // console.log(formattedRecipe);
 
     const data = await sendJSON(`${API_URL}?key=${API_KEY}`, formattedRecipe);
-    const recipe = formatRecipe(data.data.recipe);
-    console.log(recipe);
+    state.recipe = formatRecipe(data);
+    addBookmark(state.recipe);
+    console.log(state.recipe);
   } catch (err) {
     throw err;
   }

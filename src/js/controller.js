@@ -137,3 +137,8 @@ function timeout(s) {
 }
 
 // 00624c3d-c35f-43d5-9a23-817b34496641 my api key
+
+function clearStorage() {
+  localStorage.removeItem('bookmarks');
+}
+// clearStorage();
