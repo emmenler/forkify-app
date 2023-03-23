@@ -53,6 +53,7 @@ async function controlRecipes() {
 
     // Rendering the recipe
     recipeView.render(model.state.recipe);
+    console.log(model.state.recipe);
   } catch (err) {
     console.error(`${err}`);
     recipeView.renderError();
@@ -119,8 +120,9 @@ function controlRenderBookmarks() {
   bookmarksView.render(model.state.bookmarks);
 }
 
-function controlAddRecipe(newRecipe) {
-  console.log(newRecipe);
+function controlAddRecipe(userRecipe) {
+  console.log(userRecipe);
+  model.addUserRecipe(userRecipe);
 }
 
 function timeout(s) {

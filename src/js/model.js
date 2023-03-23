@@ -102,3 +102,15 @@ export function removeBookmark(id) {
 function updateBookmarksStorage() {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 }
+
+export async function addUserRecipe(userRecipe) {
+  const ingredients = Object.entries(userRecipe)
+    .filter((ent) => ent[0].startsWith('ingredient') && ent[1])
+    .map((ing) => {
+      const [quantity, unit, description] = ing[1]
+        .replaceAll(' ', '')
+        .split(',');
+      return { quantity, unit, description };
+    });
+  console.log(ingredients);
+}
