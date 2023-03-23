@@ -1,6 +1,6 @@
 import { async } from 'regenerator-runtime';
 import { API_URL, RES_PER_PAGE, API_KEY } from './config.js';
-import { getJSON, sendJSON } from './helper.js';
+import { AJAX } from './helper.js';
 
 // --- STATE ---
 export const state = {
@@ -26,7 +26,7 @@ function init() {
 export async function loadRecipe(id) {
   try {
     // Getting the recipe from the API
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await AJAX(`${API_URL}${id}?key=${API_KEY}`);
 
     // Formatting the recipe object
     state.recipe = formatRecipe(data);
@@ -60,7 +60,7 @@ function formatRecipe(data) {
 export async function loadSearchResults(query) {
   try {
     // Loading search results for provided query
-    const data = await getJSON(`${API_URL}?search=${query}`);
+    const data = await AJAX(`${API_URL}?search=${query}&key=${API_KEY}`);
 
     // Updating search results object in STATE
     state.search.results = data.data.recipes.map((recipe) => {
@@ -154,7 +154,7 @@ export async function addUserRecipe(userRecipe) {
     };
 
     // Send recipe object to API
-    const data = await sendJSON(`${API_URL}?key=${API_KEY}`, formattedRecipe);
+    const data = await AJAX(`${API_URL}?key=${API_KEY}`, formattedRecipe);
 
     // Set API data as current recipe
     state.recipe = formatRecipe(data);
