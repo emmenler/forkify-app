@@ -26,8 +26,7 @@ function init() {
   recipeView.addHandlerBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   searchPaginationView.addHandlerClick(controlPagination);
-  addRecipeView.addHandlerShowModal();
-  addRecipeView.addHandlerHideModal();
+  addRecipeView.addHandlerUploadRecipe();
 }
 
 async function controlRecipes() {

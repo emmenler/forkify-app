@@ -1,14 +1,19 @@
 import View from './View.js';
 
-class AddRecipeView {
+class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
   #btnOpen = document.querySelector('.nav__btn--add-recipe');
   #btnClose = document.querySelector('.btn--close-modal');
   #addRecipeOverlay = document.querySelector('.overlay');
   #addRecipeWindow = document.querySelector('.add-recipe-window');
 
+  constructor() {
+    super();
+    this.addHandlerHideModal();
+    this.addHandlerShowModal();
+  }
+
   #toggleRecipeWindow() {
-    console.log('toggle');
     this.#addRecipeOverlay.classList.toggle('hidden');
     this.#addRecipeWindow.classList.toggle('hidden');
   }
@@ -29,6 +34,12 @@ class AddRecipeView {
       'click',
       this.#toggleRecipeWindow.bind(this)
     );
+  }
+
+  addHandlerUploadRecipe() {
+    this._parentElement.addEventListener('submit', function (e) {
+      e.preventDefault();
+    });
   }
 }
 
