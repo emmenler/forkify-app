@@ -113,19 +113,19 @@ export async function addUserRecipe(userRecipe) {
           throw new Error('Wrong input format! Please, use correct format.');
         const [quantity, unit, description] = ingredients;
         return {
-          quantity: quantity ? null : Number(quantity),
+          quantity: !quantity ? null : Number(quantity),
           unit,
           description,
         };
       });
 
     const formattedRecipe = {
-      cookingTime: userRecipe.cookingTime,
-      image: userRecipe.image,
-      ingredients: ingredients,
+      cooking_time: Number(userRecipe.cookingTime),
+      image_url: userRecipe.image,
+      ingredients,
       publisher: userRecipe.publisher,
-      servings: userRecipe.servings,
-      sourceUrl: userRecipe.sourceUrl,
+      servings: Number(userRecipe.servings),
+      source_url: userRecipe.sourceUrl,
       title: userRecipe.title,
     };
     console.log(formattedRecipe);
