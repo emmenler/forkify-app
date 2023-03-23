@@ -133,7 +133,7 @@ async function controlAddRecipe(userRecipe) {
 
     // Close form after 2,5 sec
     setTimeout(() => {
-      addRecipeView.toggleRecipeWindow();
+      addRecipeView.closeRecipeWindow();
     }, CLOSE_MODAL_SEC * 1000);
   } catch (err) {
     console.error(`${err}`);
