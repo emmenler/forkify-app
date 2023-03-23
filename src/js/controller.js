@@ -5,6 +5,7 @@ import searchView from './views/searchView.js';
 import searchResultsView from './views/searchResultsView.js';
 import searchPaginationView from './views/searchPaginationView.js';
 import bookmarksView from './views/bookmarksView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 // Libraries imports
 import 'core-js/stable';
@@ -25,6 +26,8 @@ function init() {
   recipeView.addHandlerBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   searchPaginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerShowModal();
+  addRecipeView.addHandlerHideModal();
 }
 
 async function controlRecipes() {
@@ -115,6 +118,10 @@ function controlAddBookmark() {
 
 function controlRenderBookmarks() {
   bookmarksView.render(model.state.bookmarks);
+}
+
+function controlAddRecipe() {
+  console.log('Controlled');
 }
 
 function timeout(s) {
