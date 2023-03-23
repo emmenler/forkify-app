@@ -19,6 +19,7 @@ init();
 // --- FUNCTIONS ---
 
 function init() {
+  bookmarksView.addHanlderRender(controlRenderBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerBookmark(controlAddBookmark);
@@ -51,6 +52,7 @@ async function controlRecipes() {
     // Rendering the recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
+    console.error(`${err}`);
     recipeView.renderError();
   }
 }
@@ -75,6 +77,7 @@ async function controlSearchResults() {
     // Render initial pagination
     searchPaginationView.render(model.state.search);
   } catch (err) {
+    console.error(`${err}`);
     searchResultsView.renderError();
   }
 }
@@ -107,6 +110,10 @@ function controlAddBookmark() {
   recipeView.update(model.state.recipe);
 
   // Render bookmark in bookmarksView
+  bookmarksView.render(model.state.bookmarks);
+}
+
+function controlRenderBookmarks() {
   bookmarksView.render(model.state.bookmarks);
 }
 

@@ -14,7 +14,14 @@ export const state = {
   bookmarks: [],
 };
 
+init();
+
 // --- BUSINESS LOGIC ---
+function init() {
+  const storageBookmarks = localStorage.getItem('bookmarks');
+  if (storageBookmarks) state.bookmarks = JSON.parse(storageBookmarks);
+}
+
 export async function loadRecipe(id) {
   try {
     // Getting the recipe from the API
@@ -38,7 +45,6 @@ export async function loadRecipe(id) {
       state.recipe.isBookmark = false;
     }
   } catch (err) {
-    console.error(`${err}`);
     throw err;
   }
 }
@@ -55,7 +61,6 @@ export async function loadSearchResults(query) {
       };
     });
   } catch (err) {
-    console.error(`${err}`);
     throw err;
   }
 }
