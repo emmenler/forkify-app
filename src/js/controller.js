@@ -120,9 +120,13 @@ function controlRenderBookmarks() {
   bookmarksView.render(model.state.bookmarks);
 }
 
-function controlAddRecipe(userRecipe) {
-  console.log(userRecipe);
-  model.addUserRecipe(userRecipe);
+async function controlAddRecipe(userRecipe) {
+  try {
+    await model.addUserRecipe(userRecipe);
+  } catch (err) {
+    console.error(`${err}`);
+    addRecipeView.renderError(err.message);
+  }
 }
 
 function timeout(s) {
