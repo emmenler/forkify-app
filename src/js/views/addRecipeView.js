@@ -2,6 +2,8 @@ import View from './View.js';
 
 class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
+  _successMessage =
+    'Recipe is added successfully! You can find it in the bookmarks.';
   #btnOpen = document.querySelector('.nav__btn--add-recipe');
   #btnClose = document.querySelector('.btn--close-modal');
   #addRecipeOverlay = document.querySelector('.overlay');
