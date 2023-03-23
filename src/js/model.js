@@ -58,7 +58,10 @@ function formatRecipe(data) {
 // --- SEARCH RESULTS ---
 export async function loadSearchResults(query) {
   try {
+    // Loading search results for provided query
     const data = await getJSON(`${API_URL}?search=${query}`);
+
+    // Updating search results object in STATE
     state.search.results = data.data.recipes.map((recipe) => {
       return {
         id: recipe.id,
@@ -74,13 +77,18 @@ export async function loadSearchResults(query) {
 
 export function getSearchResultsPage(page) {
   state.search.page = page;
+
+  // Counting first/last elements of current page
   const first = (page - 1) * state.search.resultsPerPage;
   const last = page * state.search.resultsPerPage;
+
+  // Returning portion of the search results beetween first and last
   return state.search.results.slice(first, last);
 }
 
 // --- RECIPE SERVINGS ---
 export function updateServings(newServings) {
+  // Update serings of each ingredient of recipe object
   state.recipe.ingredients.forEach((ing) => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
   });
@@ -115,12 +123,16 @@ function updateBookmarksStorage() {
 // --- SEND USER RECIPE ---
 export async function addUserRecipe(userRecipe) {
   try {
+    // Create anformat an array of ingredients from user recipe
     const ingredients = Object.entries(userRecipe)
       .filter((ent) => ent[0].startsWith('ingredient') && ent[1])
       .map((ing) => {
         const ingredients = ing[1].replaceAll(' ', '').split(',');
         if (ingredients.length != 3)
+          // Throw error if user submitted in wrong format
           throw new Error('Wrong input format! Please, use correct format.');
+
+        // Create an object of ingredients from ingredients array
         const [quantity, unit, description] = ingredients;
         return {
           quantity: !quantity ? null : Number(quantity),
@@ -129,6 +141,7 @@ export async function addUserRecipe(userRecipe) {
         };
       });
 
+    // Create a final recipe object that will be sent to API
     const formattedRecipe = {
       cooking_time: Number(userRecipe.cookingTime),
       image_url: userRecipe.image,
@@ -138,12 +151,15 @@ export async function addUserRecipe(userRecipe) {
       source_url: userRecipe.sourceUrl,
       title: userRecipe.title,
     };
-    // console.log(formattedRecipe);
 
+    // Send recipe object to API
     const data = await sendJSON(`${API_URL}?key=${API_KEY}`, formattedRecipe);
+
+    // Set API data as current recipe
     state.recipe = formatRecipe(data);
+
+    // Make user's recipe bookmarked
     addBookmark(state.recipe);
-    console.log(state.recipe);
   } catch (err) {
     throw err;
   }
