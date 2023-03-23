@@ -36,9 +36,12 @@ class AddRecipeView extends View {
     );
   }
 
-  addHandlerUploadRecipe() {
+  addHandlerUploadRecipe(handler) {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
+      const recipeArr = [...new FormData(this)];
+      const recipeData = Object.fromEntries(recipeArr);
+      handler(recipeData);
     });
   }
 }

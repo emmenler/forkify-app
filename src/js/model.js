@@ -36,7 +36,7 @@ export async function loadRecipe(id) {
       ingredients: recipe.ingredients,
       publisher: recipe.publisher,
       servings: recipe.servings,
-      source: recipe.source_url,
+      sourceUrl: recipe.source_url,
       title: recipe.title,
     };
     if (state.bookmarks.some((bookmark) => bookmark.id === state.recipe.id)) {

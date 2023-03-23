@@ -26,7 +26,7 @@ function init() {
   recipeView.addHandlerBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   searchPaginationView.addHandlerClick(controlPagination);
-  addRecipeView.addHandlerUploadRecipe();
+  addRecipeView.addHandlerUploadRecipe(controlAddRecipe);
 }
 
 async function controlRecipes() {
@@ -119,8 +119,8 @@ function controlRenderBookmarks() {
   bookmarksView.render(model.state.bookmarks);
 }
 
-function controlAddRecipe() {
-  console.log('Controlled');
+function controlAddRecipe(newRecipe) {
+  console.log(newRecipe);
 }
 
 function timeout(s) {
