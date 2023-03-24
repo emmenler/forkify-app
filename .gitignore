@@ -1,3 +1,4 @@
 # DIRECTORIES
 node_modules/
+dist/
 .parcel-cache/
