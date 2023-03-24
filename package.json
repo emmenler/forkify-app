@@ -1,0 +1,31 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Forkify - browse tons of recipes and find just what you want",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petr-kulikov/forkify-app.git"
+  },
+  "author": "Petr Kulikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petr-kulikov/forkify-app/issues"
+  },
+  "homepage": "https://github.com/petr-kulikov/forkify-app#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "@parcel/transformer-sass": "^2.8.3",
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "core-js": "^3.29.1",
+    "fracty": "^1.0.11",
+    "regenerator-runtime": "^0.13.11"
+  }
+}
