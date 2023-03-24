@@ -7,6 +7,6 @@
 #### Screenshots
 
 <p align="center">
-  <img src="./src/readme/readme1.png" width="350" alt="Forkify app screenshot">
-  <img src="./src/readme/readme2.png" width="350" alt="Forkify app screenshot">
+  <img src="./src/readme/readme1.png" width="763" alt="Forkify app screenshot">
+  <img src="./src/readme/readme2.png" width="763" alt="Forkify app screenshot">
 </p>
